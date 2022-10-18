@@ -10,7 +10,7 @@ const crlf = () => {};
 const transformLineEnding = (string, lineEnding) => {
   string = (string != null ? string.toString() : "");
   const { replaceCR, replaceCRLF, replaceLF } = LineEndingReplacements;
-  
+
   if (lineEnding === LineEndings.CR) {
     string = replaceCRLF(string, "\r");
     string = replaceLF(string, "\r");
@@ -27,7 +27,8 @@ const transformLineEnding = (string, lineEnding) => {
 const LineEndings = {
   CR: Symbol("CR"),
   LF: Symbol("LF"),
-  CRLF: Symbol("CRLF")
+  CRLF: Symbol("CRLF"),
+  disableConverter: Symbol("crlf-converter-disable")
 };
 
 const LineEndingReplacements = {
