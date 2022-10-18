@@ -13,13 +13,49 @@ const lineEndingFn = (le, strings, ...values) => {
 };
 
 // Create a tagged template lf`...` that formats text using LF line endings.
-const lf = (strings, ...values) => lineEndingFn(LineEndings.LF, strings, values);
+const lf = (strings, ...values) => {
+  return strings.reduce((result, literal, index) => {
+    const transformedString = transformLineEnding(literal, LineEndings.LF);
+
+    let transformedValue = (values[index] != null ? values[index] : "");
+
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(values[index], LineEndings.LF);
+    }
+
+    return `${result}${transformedString}${transformedValue}`;
+  }, "")
+};//lineEndingFn(LineEndings.LF, strings, values);
 
 // Create a tagged template cr`...` that formats text using CR line endings.
-const cr = (strings, ...values) => lineEndingFn(LineEndings.CR, strings, values);
+const cr = (strings, ...values) => {
+  return strings.reduce((result, literal, index) => {
+    const transformedString = transformLineEnding(literal, LineEndings.CR);
+
+    let transformedValue = (values[index] != null ? values[index] : "");
+
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(values[index], LineEndings.CR);
+    }
+
+    return `${result}${transformedString}${transformedValue}`;
+  }, "")
+};//lineEndingFn(LineEndings.CR, strings, values);
 
 // Create a tagged template crlf`...` that formats text using CRLF line endings.
-const crlf = (strings, ...values) => lineEndingFn(LineEndings.CRLF, strings, values);
+const crlf = (strings, ...values) => {
+  return strings.reduce((result, literal, index) => {
+    const transformedString = transformLineEnding(literal, LineEndings.CRLF);
+
+    let transformedValue = (values[index] != null ? values[index] : "");
+
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(values[index], LineEndings.CRLF);
+    }
+
+    return `${result}${transformedString}${transformedValue}`;
+  }, "")
+};//lineEndingFn(LineEndings.CRLF, strings, values);
 
 const transformLineEnding = (string, lineEnding) => {
   string = (string != null ? string.toString() : "");
