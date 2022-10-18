@@ -12,9 +12,10 @@ Options:
     CR is a carriage return character \r (rare)
     LF is a line feed character \n (common on Unix and macOS)
     CRLF is a combined ending \r\n (common on Windows)
-    
+
 Example:
-     cat in.txt | crlf-convert LF > out.txt`;
+
+    cat in.txt | crlf-convert LF > out.txt`;
 
 module.exports = {
   help,
